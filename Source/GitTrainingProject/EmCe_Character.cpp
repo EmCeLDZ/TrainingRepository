@@ -1,6 +1,4 @@
 
-
-
 #include "EmCe_Character.h"
 
 // Sets default values
@@ -40,5 +38,31 @@ void AEmCe_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// Define mouse input bindings.
+	InputComponent->BindAction("LeftMouseButton", IE_Pressed, this, &AEmCe_Character::LeftMouseButtonPressed);
+	InputComponent->BindAction("RightMouseButton", IE_Pressed, this, &AEmCe_Character::RightMouseButtonPressed);
+
+
+
+}
+
+// Left mouse button pressed.
+
+void AEmCe_Character::LeftMouseButtonPressed()
+{
+	// Print message to screen.
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Left mouse button pressed!"));
+
+
+}
+
+// Right mouse button pressed.
+
+void AEmCe_Character::RightMouseButtonPressed()
+{
+	// Print message to screen.
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Right mouse button pressed!"));
 }
 

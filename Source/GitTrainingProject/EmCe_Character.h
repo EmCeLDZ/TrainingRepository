@@ -26,4 +26,16 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Left mouse button pressed.
+
+	UFUNCTION(BlueprintCallable, Category = "EmCe_Character")
+	void LeftMouseButtonPressed();
+
+	// Right mouse button pressed.
+
+	UFUNCTION(BlueprintCallable, Category = "EmCe_Character")
+
+	void RightMouseButtonPressed();
+
+
 };
