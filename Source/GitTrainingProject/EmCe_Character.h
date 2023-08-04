@@ -38,4 +38,25 @@ public:
 	void RightMouseButtonPressed();
 
 
+	// Montage animation.
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EmCe_Character")
+		class UAnimMontage* AnimMontage;
+
+
+	// NIagara System.
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EmCe_Character")
+		class UNiagaraSystem* NiagaraSystem;
+
+
+
+	// Effect Sound.
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EmCe_Character")
+		class USoundBase* Sound;
+
+
+
+
 };

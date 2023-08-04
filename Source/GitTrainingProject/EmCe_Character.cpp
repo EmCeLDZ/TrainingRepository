@@ -1,11 +1,29 @@
 
 #include "EmCe_Character.h"
+#include <Kismet/GameplayStatics.h>
+#include <NiagaraComponent.h>
+#include <NiagaraFunctionLibrary.h>
+
+
 
 // Sets default values
 AEmCe_Character::AEmCe_Character()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Initialize montage animation.
+
+	AnimMontage = nullptr;
+
+	// Initialize particle system.
+
+	NiagaraSystem = nullptr;
+
+	// Initialize sound.
+
+	Sound = nullptr;
+
 
 }
 
@@ -52,10 +70,47 @@ void AEmCe_Character::LeftMouseButtonPressed()
 {
 	// Print message to screen.
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Left mouse button pressed!"));
+	GEngine->AddOnScreenDebugMessage(-11, 0.5f, FColor::Blue, TEXT("Triggered C++ Left mouse button function!"));
+
+		// Check if animation is playing.
+
+		if (IsPlayingRootMotion())
+		{
+			// Print message to screen.
+
+			GEngine->AddOnScreenDebugMessage(-11, 0.5f, FColor::Blue, TEXT("Animation is playing!"));
+		}
+		else
+		{
+			// Print message to screen.
+
+			GEngine->AddOnScreenDebugMessage(-11, 0.5f, FColor::Blue, TEXT("Animation is not playing!"));
+
+			// Play montage animation.
+
+			PlayAnimMontage(AnimMontage, 1.0f, FName("DefaultSlot"));
+
+			// Spawn niagara system attached to actor mesh.
+
+			UNiagaraComponent* NiagaraComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(NiagaraSystem, GetMesh(), FName("DefaultSlot"), FVector(0.0f, 0.0f, 0.0f), FRotator(0.0f, 0.0f, 0.0f), EAttachLocation::SnapToTarget, true);
+
+			// Play sound.
+
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), Sound, GetActorLocation());
+		}
 
 
-}
+
+	}
+
+
+
+
+
+
+
+
+
 
 // Right mouse button pressed.
 
@@ -63,6 +118,6 @@ void AEmCe_Character::RightMouseButtonPressed()
 {
 	// Print message to screen.
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Right mouse button pressed!"));
+	GEngine->AddOnScreenDebugMessage(-11, 0.5f, FColor::Green, TEXT("Triggered C++ Right mouse button function!"));
 }
 
